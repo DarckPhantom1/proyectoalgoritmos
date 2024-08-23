@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Base64;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -102,7 +103,7 @@ conexionSQL cc = new conexionSQL();
             JOptionPane.showMessageDialog( null,"Usuario no puede ser vacio");
            }else{
                
-          String SQLVerificar = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?";
+        String SQLVerificar = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?";
         PreparedStatement pstVerificar = con.prepareStatement(SQLVerificar);
         pstVerificar.setString(1, nusuario);
         
@@ -113,7 +114,8 @@ conexionSQL cc = new conexionSQL();
             JOptionPane.showMessageDialog(null, "El usuario ya existe. Por favor, elija otro nombre de usuario.");
             return; // Salir del método si el usuario ya existe
         }
-       
+    
+        //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
            String SQL="insert into usuarios (usuario, pass, rol) values (?,?,?)";
           
            PreparedStatement pst = con.prepareStatement(SQL);

@@ -9,6 +9,7 @@ import static formularios.login.nombreUsuario;
 import static formularios.login.userRol;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Base64;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -177,7 +178,15 @@ try{
     
         char[] passwordnuevo = txtNuevo.getPassword();
            String Passwordn= new String(passwordnuevo);
-           if (passwordnuevo == null || Passwordn.trim().isEmpty()) {
+           char[] passwordconfirmacion = txtConfirmacion.getPassword();
+          String Passwordc= new String(passwordconfirmacion);
+           
+    //    String passwordBase64 = Base64.getEncoder().encodeToString(Passwordn.getBytes());
+       
+          
+          if(Passwordn.equals(Passwordc)){
+              
+                 if (passwordnuevo == null || Passwordn.trim().isEmpty()) {
             JOptionPane.showMessageDialog( null,"Password no puede ser vacio");
            }else{
                  
@@ -193,6 +202,14 @@ try{
            this.setVisible(false);
         
            }
+              
+              
+          }else{
+              JOptionPane.showMessageDialog( null,"Verifique, confirmacion y password no son iguales");
+          }
+     
+           
+        
         }catch (Exception e){
           JOptionPane.showMessageDialog(null,"Error Registro "+e.getMessage());
            

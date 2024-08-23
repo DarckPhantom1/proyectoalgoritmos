@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import javax.swing.JOptionPane;
 
 /**
@@ -114,12 +115,15 @@ public static String userRol;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         
         String usuario = txtUsuario.getText();
-        String password = new String(txtPassword.getPassword());  // Si txtPassword es un JPasswordField
-        // Conectar a la base de datos
+        String password = new String(txtPassword.getPassword());  
+        String passwordBase64 = Base64.getEncoder().encodeToString(password.getBytes());
+       
+      
+     
         conexionSQL con = new conexionSQL();
         Connection conexion = con.conexion();
         try {
-            // Preparar la consulta SQL para validar el usuario y la contraseña
+          
             String query = "SELECT * FROM usuarios WHERE usuario = ? AND pass = ?";
             PreparedStatement pst = conexion.prepareStatement(query);
             pst.setString(1, usuario);
@@ -129,7 +133,7 @@ public static String userRol;
             if (rs.next()) {
                  nombreUsuario = usuario;
                  userRol = rs.getString("rol");           
-                // Si hay un resultado, el usuario y la contraseña son correctos
+               
                 JOptionPane.showMessageDialog(null, "Login exitoso"+nombreUsuario);
                 formMenuPrincipal menu = new formMenuPrincipal();
                 menu.setVisible(true);
@@ -143,13 +147,13 @@ public static String userRol;
                 
                
       
-                this.dispose();  // Cierra el formulario de login
+                this.dispose();  
             } else {
-                // Si no hay resultados, el usuario o la contraseña son incorrectos
+               
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
 
-            // Cerrar la conexión y liberar recursos
+       
             rs.close();
             pst.close();
             conexion.close();
