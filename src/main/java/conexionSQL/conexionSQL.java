@@ -19,9 +19,9 @@ public class conexionSQL {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conectar=DriverManager.getConnection(cadena,usuario,password);
-            JOptionPane.showMessageDialog(null,"Conexion exitosa inventariofacturacion");
+            JOptionPane.showMessageDialog(null,"Conexion exitosa a Base de datos");
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error de Conexion"+e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error de Conexion "+e.getMessage());
             
         }
          return conectar;

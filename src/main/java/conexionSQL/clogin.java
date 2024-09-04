@@ -38,7 +38,7 @@ public class clogin {
             rs= ps.executeQuery();
             
             if (rs.next()){
-            JOptionPane.showMessageDialog(null,"ha ingresado correctamente");   
+            JOptionPane.showMessageDialog(null,"Ha ingresado correctamente");   
             formMenuPrincipal objetoMenu= new formMenuPrincipal();
             objetoMenu.setVisible(true);
             }else{

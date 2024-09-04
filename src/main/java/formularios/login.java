@@ -1,5 +1,6 @@
 package formularios;
 
+import Reportes.Excel;
 import conexionSQL.clogin;
 import conexionSQL.conexionSQL;
 import javax.swing.JPasswordField;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Rony
+ * @author Rony Choche
  */
 public class login extends javax.swing.JFrame {
 public static String nombreUsuario;
@@ -58,6 +59,12 @@ public static String userRol;
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
 
@@ -134,7 +141,7 @@ public static String userRol;
                  nombreUsuario = usuario;
                  userRol = rs.getString("rol");           
                
-                JOptionPane.showMessageDialog(null, "Login exitoso"+nombreUsuario);
+                JOptionPane.showMessageDialog(null, "Login exitoso "+ nombreUsuario);
                 formMenuPrincipal menu = new formMenuPrincipal();
                 menu.setVisible(true);
                 
@@ -175,6 +182,10 @@ public static String userRol;
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
