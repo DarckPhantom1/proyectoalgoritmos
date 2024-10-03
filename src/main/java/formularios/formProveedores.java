@@ -111,7 +111,7 @@ public class formProveedores extends javax.swing.JFrame {
         }
     
         //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
-          String SQL="insert into proveedores (nombre,telefono,direccion,activo) values (?,?,?,?)";
+          String SQL="insert into proveedores (nombre,telefono,direccion,usuario_ingresa,activo) values (?,?,?,?,?)";
           
            
            PreparedStatement pst = con.prepareStatement(SQL);
@@ -119,7 +119,8 @@ public class formProveedores extends javax.swing.JFrame {
            pst.setString(1,txtNombre.getText());
            pst.setString(2,txtTelefono.getText());
            pst.setString(3,txtDireccion.getText());
-           pst.setString(4,Activo);
+           pst.setString(4,usuario);
+           pst.setString(5,Activo);
                      
            pst.execute();
            
@@ -277,15 +278,15 @@ public class formProveedores extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(267, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(477, Short.MAX_VALUE)))
+                    .addContainerGap(410, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

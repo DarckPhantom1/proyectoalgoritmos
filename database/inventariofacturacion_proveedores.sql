@@ -4,6 +4,8 @@
 -- ------------------------------------------------------
 -- Server version	8.0.36
 
+use inventariofacturacion;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -27,6 +29,7 @@ CREATE TABLE `proveedores` (
   `nombre` varchar(100) NOT NULL,
   `telefono` varchar(100) NOT NULL,
   `direccion` varchar(100) NOT NULL,
+  `usuario_ingresa` varchar(100) NOT NULL,
   `activo` varchar(100) NOT NULL,
   PRIMARY KEY (`idProveedor`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,7 +41,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (1,'Proveedor1','3216548','Direccion','Si');
+INSERT INTO `proveedores` VALUES (1,'Proveedor1','3216548','Direccion','admin','Si');
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
