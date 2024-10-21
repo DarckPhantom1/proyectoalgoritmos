@@ -53,7 +53,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -65,6 +64,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUsuario.setText("jLabel1");
@@ -130,6 +130,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem13.setText("Vendedores");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +139,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem13);
 
+        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem14.setText("Sucursales");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +148,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem14);
 
+        jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem15.setText("Marcas");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +157,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem15);
 
+        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem16.setText("Unidad Medida");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +166,13 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem16);
 
+        jMenuItem17.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem17.setText("Productos");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem17);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -173,10 +183,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem6);
-
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem7.setText("Inventario");
-        jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
 
@@ -254,12 +260,24 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-    formClientes objeto= new formClientes();
-        objeto.setVisible(true);            // TODO add your handling code here:
+       if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        formClientes objeto= new formClientes();
+        objeto.setVisible(true);  
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
+                   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
+          if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        formcompras objeto= new formcompras();
+        objeto.setVisible(true);  
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -279,33 +297,72 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-    formProveedores1 objeto= new formProveedores1();
+      if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        formProveedores1 objeto= new formProveedores1();
         objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
+       
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-    Vendedores objeto= new Vendedores();
+     if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        Vendedores objeto= new Vendedores();
         objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+     
+       
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-    formsucursales objeto= new formsucursales();
-        objeto.setVisible(true); 
+     if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        formsucursales objeto= new formsucursales();
+        objeto.setVisible(true);  
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
+      
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        formMarcas objeto= new formMarcas();
+      if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+       formMarcas objeto= new formMarcas();
         objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
+        
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-
-        formunidadmedida objeto= new formunidadmedida();
+ if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+       formunidadmedida objeto= new formunidadmedida();
         objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+ if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+ formproductos objeto= new formproductos();
+        objeto.setVisible(true);      
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+  
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,7 +420,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblRol;

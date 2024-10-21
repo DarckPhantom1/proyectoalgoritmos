@@ -4,7 +4,7 @@ formularios\formsucursales$7.class
 formularios\formClientes$6.class
 formularios\cambioPassword$1.class
 formularios\formProveedores1$9.class
-formularios\formCompras.class
+formularios\formcompras$7.class
 formularios\formClientes$3.class
 formularios\formClientes$9.class
 formularios\formMenuPrincipal$6.class
@@ -27,6 +27,7 @@ formularios\formMarcas$3.class
 formularios\formunidadmedida$4.class
 formularios\cambioPassword$4.class
 formularios\formunidadmedida$8.class
+formularios\formcompras$11.class
 formularios\formMarcas$2.class
 formularios\formunidadmedida$1.class
 Reportes\Excel.class
@@ -38,21 +39,26 @@ formularios\cambioPassword$6.class
 formularios\Vendedores$4.class
 formularios\newUser.class
 formularios\formsucursales.class
+formularios\formcompras$2.class
 formularios\formClientes$4.class
 formularios\formProveedores$5.class
 formularios\formProveedores1$3.class
 formularios\formMenuPrincipal$13.class
 formularios\formsucursales$6.class
 formularios\formunidadmedida$2.class
+formularios\pst.class
+formularios\formcompras$10.class
 formularios\newUser$6.class
 formularios\cambioPassword.class
 formularios\formMarcas$8.class
 formularios\Vendedores$5.class
 formularios\formMarcas$1.class
 formularios\login$4.class
+formularios\formcompras$8.class
 formularios\formMenuPrincipal$3.class
 formularios\formproductos$6.class
 formularios\formProveedores1$4.class
+formularios\formcompras$1.class
 formularios\formProveedores$4.class
 formularios\formProveedores1$2.class
 formularios\formMenuPrincipal$2.class
@@ -61,6 +67,7 @@ formularios\Vendedores$9.class
 formularios\formProveedores$6.class
 formularios\formProveedores1$5.class
 formularios\formunidadmedida$6.class
+formularios\formcompras$3.class
 formularios\cambioPassword$5.class
 formularios\formMenuPrincipal$10.class
 formularios\formProveedores$3.class
@@ -68,6 +75,7 @@ formularios\formunidadmedida$3.class
 conexionSQL\clogin.class
 formularios\Vendedores$6.class
 formularios\formMarcas$7.class
+formularios\formcompras$6.class
 formularios\formProveedores1$8.class
 formularios\formproductos$8.class
 formularios\formClientes$2.class
@@ -76,6 +84,7 @@ conexionSQL\conexionSQL.class
 formularios\formMenuPrincipal$15.class
 formularios\formMenuPrincipal$8.class
 formularios\formproductos$5.class
+formularios\formcompras$9.class
 formularios\formProveedores1.class
 formularios\formClientes$5.class
 formularios\formMenuPrincipal$5.class
@@ -86,7 +95,6 @@ formularios\login.class
 formularios\formsucursales$8.class
 formularios\Vendedores.class
 formularios\formProveedores$1.class
-formularios\formproductos$9.class
 formularios\cambioPassword$3.class
 formularios\formproductos$2.class
 formularios\newUser$2.class
@@ -94,6 +102,7 @@ formularios\formMenuPrincipal$12.class
 formularios\formsucursales$2.class
 formularios\formClientes$8.class
 formularios\formMenuPrincipal$16.class
+formularios\formcompras.class
 formularios\login$2.class
 formularios\formMarcas$5.class
 formularios\Vendedores$8.class
@@ -102,6 +111,7 @@ formularios\formsucursales$9.class
 formularios\formunidadmedida.class
 formularios\formunidadmedida$5.class
 formularios\formProveedores$8.class
+formularios\formcompras$5.class
 formularios\formMarcas.class
 formularios\formClientes$1.class
 formularios\formMenuPrincipal$1.class
@@ -111,12 +121,13 @@ formularios\formClientes$7.class
 formularios\formproductos.class
 formularios\formProveedores1$1.class
 formularios\login$1.class
-formularios\formCompras$1.class
 formularios\formMenuPrincipal$11.class
+formularios\formMenuPrincipal$17.class
 formularios\Vendedores$2.class
 formularios\formClientes.class
 formularios\formMenuPrincipal$7.class
 formularios\formsucursales$3.class
+formularios\formcompras$4.class
 formularios\formProveedores1$7.class
 formularios\newUser$3.class
 formularios\formproductos$3.class
