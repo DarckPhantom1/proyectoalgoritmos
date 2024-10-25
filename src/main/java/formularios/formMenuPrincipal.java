@@ -282,6 +282,12 @@ public class formMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+           if("Administrador".equals(userRol)||"Operador".equals(userRol) ){
+        formfactura objeto= new formfactura();
+        objeto.setVisible(true);  
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed

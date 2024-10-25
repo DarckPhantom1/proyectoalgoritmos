@@ -110,52 +110,60 @@ conexionSQL cc = new conexionSQL();
         
        
      public void insertarDatos(){
-    
-       try{
-           
-           String nusuario = txtNit.getText();
-           String valorSinGuion = nusuario.replace("-", "");
-           String Activo="Si";
-          
-           if (nusuario == null || nusuario.trim().isEmpty()) {
-            JOptionPane.showMessageDialog( null,"Usuario no puede ser vacio");
-           }else{
-               
-        String SQLVerificar = "SELECT COUNT(*) AS cantidad FROM  clientes WHERE REPLACE(?, '-', '') = REPLACE(?, '-', '')AND activo = 'Si'  ";
+ 
+     try {
+        // Obtener el valor del NIT y eliminar los guiones
+        String nusuario = txtNit.getText().trim();
+        String valorSinGuion = nusuario.replace("-", "");
+        String Activo = "Si";
+        String usuario1="Rchoche";        
+        // Verificar si el campo NIT está vacío
+        if (nusuario.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El NIT no puede ser vacío.");
+            return; // Salir si está vacío
+        }
+        
+        // Consulta para verificar si el cliente ya existe
+        String SQLVerificar = "SELECT COUNT(*) AS cantidad FROM clientes WHERE REPLACE(nit, '-', '') = ? AND activo = 'Si'";
         PreparedStatement pstVerificar = con.prepareStatement(SQLVerificar);
-        pstVerificar.setString(1, nusuario);
-        pstVerificar.setString(2, nusuario);
+        pstVerificar.setString(1, valorSinGuion);  // Usamos el NIT sin guiones
         ResultSet rs = pstVerificar.executeQuery();
         rs.next();
         
+        // Si el cliente ya existe, mostramos un mensaje
         if (rs.getInt(1) > 0) {
-            JOptionPane.showMessageDialog(null, "El usuario ya existe. Por favor, elija otro nombre de usuario.");
-            return; // Salir del método si el usuario ya existe
+            JOptionPane.showMessageDialog(null, "El cliente ya existe. Por favor, elija otro NIT.");
+            return; // Salir del método si el cliente ya existe
         }
-    
-        //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
-          String SQL="insert into clientes (nit,nombre,telefono,direccion,usuario_igresa,activo) values (?,?,?,?,?,?)";
-          
-           
-           PreparedStatement pst = con.prepareStatement(SQL);
-           
-           pst.setString(1,txtNit.getText());
-           pst.setString(2,txtNombre.getText());
-           pst.setString(3,txtTelefono.getText());
-           pst.setString(4,txtDireccion.getText());
-           pst.setString(5,usuario);
-           pst.setString(6,Activo);
-                     
-           pst.execute();
-           
-           JOptionPane.showMessageDialog( null,"Regustri Guardado con exito");
-           mostrardatos();
-           limpiarDatos();
-           }
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"Error Registro "+e.getMessage());
-            
-        }
+        
+        // Consulta para insertar el nuevo cliente
+        String SQL = "INSERT INTO clientes (nit, nombre, telefono, direccion, usuario_igresa, activo) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(SQL);
+        
+        // Asignar los valores a la consulta
+        pst.setString(1, nusuario); // Insertamos el NIT con guiones si es necesario
+        pst.setString(2, txtNombre.getText());
+        pst.setString(3, txtTelefono.getText());
+        pst.setString(4, txtDireccion.getText());
+        pst.setString(5, usuario);  // Supongo que 'usuario' es una variable que ya tienes definida
+        pst.setString(6, Activo);   // Activo siempre será "Si"
+        
+        // Ejecutar la inserción
+        pst.execute();
+        
+        // Mostrar un mensaje de éxito
+        JOptionPane.showMessageDialog(null, "Registro guardado con éxito.");
+        
+        // Llamar a métodos adicionales para actualizar los datos y limpiar los campos
+        mostrardatos();
+        limpiarDatos();
+        
+    } catch (Exception e) {
+        // Mostrar un mensaje de error si ocurre una excepción
+        JOptionPane.showMessageDialog(null, "Error en el registro: " + e.getMessage());
+    }
+
+
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

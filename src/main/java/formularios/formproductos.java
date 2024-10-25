@@ -15,16 +15,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 public class formproductos extends javax.swing.JFrame {
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
     String usuario=nombreUsuario.toUpperCase();
     
   public void mostrardatos(){
-      String[] titulos= {"ID PRODUCTO","NOMBRE","UNIDAD MEDIDA","MARCA","PRECIO"};
-      String[]registros= new String[5];
+      String[] titulos= {"ID PRODUCTO","NOMBRE","UNIDAD MEDIDA","MARCA","PRECIO","EXISTENCIA"};
+      String[]registros= new String[6];
       DefaultTableModel modelo=new DefaultTableModel(null,titulos);
-      String SQL ="select idproducto,nombre,unidadmedida,marca,precioventa from producto p where activo ='Si'";
+      String SQL ="select idproducto,nombre,unidadmedida,marca,precioventa,unidades from producto p where activo ='Si'";
       
       try {
           
@@ -36,6 +37,7 @@ public class formproductos extends javax.swing.JFrame {
              registros[2]=rs.getString("unidadmedida");
              registros[3]=rs.getString("marca");
              registros[4]=rs.getString("precioventa");
+             registros[5]=rs.getString("unidades");
              modelo.addRow(registros);
           }
           tblUsuarios.setModel(modelo);
@@ -44,7 +46,34 @@ public class formproductos extends javax.swing.JFrame {
       }
   }
   
-  
+     public void filtrardatos(String valor){
+      String[] titulos= {"ID PRODUCTO","NOMBRE","UNIDAD MEDIDA","MARCA","PRECIO","EXISTENCIA"};
+      String[]registros= new String[6];
+      DefaultTableModel modelo=new DefaultTableModel(null,titulos);
+      String SQL ="select idproducto,nombre,unidadmedida,marca,precioventa,unidades from producto p where activo ='Si'and nombre like '%"+valor+"%'";
+          
+      try {
+          
+          Statement st=con.createStatement();
+          ResultSet rs=st.executeQuery(SQL) ;
+          while (rs.next()){
+             registros[0]=rs.getString("idproducto");
+             registros[1]=rs.getString("nombre");
+             registros[2]=rs.getString("unidadmedida");
+             registros[3]=rs.getString("marca");
+             registros[4]=rs.getString("precioventa");
+             registros[5]=rs.getString("unidades");
+             modelo.addRow(registros);
+      
+          }
+          tblUsuarios.setModel(modelo);
+      } catch (Exception e){
+          JOptionPane.showMessageDialog(null,"Error Registro "+e.getMessage());  
+      }
+  }
+
+    
+     
    public void llenarSelectmarca(){
    String SQL = "select nombre from marca s where activo='Si'";
 
@@ -218,6 +247,8 @@ try {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -381,6 +412,14 @@ try {
         });
         jScrollPane3.setViewportView(tblUsuarios);
 
+        jLabel8.setText("Buscar compra por producto");
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -388,11 +427,19 @@ try {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(8, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel8)
+                        .addGap(118, 118, 118)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,7 +449,10 @@ try {
                         .addGap(44, 44, 44)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(8, 8, 8)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -476,6 +526,11 @@ try {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        filtrardatos(txtBuscar.getText());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -538,12 +593,14 @@ try {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblUsuarios;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;

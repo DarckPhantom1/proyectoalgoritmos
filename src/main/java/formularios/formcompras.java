@@ -213,55 +213,79 @@ try {
     }
         
        
-     public void insertarDatos(){
-    
-       try{
-           String precio = txtPrecio.getText();
-            String cantidad = txtCantidad.getText();
-           String Activo="Si";
-           LocalDate fechaActual= LocalDate.now();
-            int cantidad1 = Integer.parseInt(txtCantidad.getText());
-            double precio1 = Double.parseDouble(txtPrecio.getText());
-            double total = cantidad1 * precio1;
-           
-           if (jComboBox1.getSelectedItem() == null || jComboBox2.getSelectedItem() == null || jComboBox3.getSelectedItem() == null || jComboBox4.getSelectedItem() == null ) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una opción en ambos combo boxes");
+    public void insertarDatos() {
+    try {
+        String producto = jComboBox3.getSelectedItem().toString();
+        String marca = jComboBox1.getSelectedItem().toString();
+        String unidadMedida = jComboBox2.getSelectedItem().toString();
+        String proveedor = jComboBox4.getSelectedItem().toString();
+        String precio = txtPrecio.getText();
+        String cantidad = txtCantidad.getText();
+        String Activo = "Si";
+        LocalDate fechaActual = LocalDate.now();
+        int cantidadCompra = Integer.parseInt(cantidad);
+        double precioUnitario = Double.parseDouble(precio);
+        double total = cantidadCompra * precioUnitario;
+
+        // Verifica si los combos están seleccionados
+        if (producto == null || marca == null || unidadMedida == null || proveedor == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una opción en los combo boxes");
             return;
         }
-            if (precio == null || precio.trim().isEmpty()|| cantidad == null || cantidad.trim().isEmpty()) {
-            JOptionPane.showMessageDialog( null,"Nombre de Producto no puede ser vacio");
-           
-             
-           }else{
-               
-        //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
-          String SQL="insert into compras (producto,marca,unidadmedida,proveedor,preciou,unidadescompra,total,usuario,fecha,activo) values(?,?,?,?,?,?,?,?,?,?)";
-          
-           PreparedStatement pst = con.prepareStatement(SQL);
-          
-           pst.setString(1, jComboBox3.getSelectedItem().toString()); 
-           pst.setString(2, jComboBox1.getSelectedItem().toString());
-           pst.setString(3, jComboBox2.getSelectedItem().toString());
-           pst.setString(4, jComboBox4.getSelectedItem().toString());
-           pst.setString(5, txtPrecio.getText());
-           pst.setString(6, txtCantidad.getText());
-           pst.setDouble(7, total);
-           pst.setString(8, usuario);
-           pst.setDate(9, Date.valueOf(fechaActual));
-           pst.setString(10, Activo);
-         
- 
-           pst.execute();
-           
-           JOptionPane.showMessageDialog( null,"Regustro Guardado con exito");
-           mostrardatos();
-           limpiarDatos();
-           }
-        }catch (Exception e){
-          JOptionPane.showMessageDialog(null,"Error Registro "+e.getMessage());
-            
+
+        // Consulta a la tabla producto para verificar si existe
+        String sqlVerificar = "SELECT unidades FROM producto WHERE nombre = ? AND unidadmedida = ? AND marca = ? AND activo = 'Si'";
+        PreparedStatement pstVerificar = con.prepareStatement(sqlVerificar);
+        pstVerificar.setString(1, producto);
+        pstVerificar.setString(2, unidadMedida);
+        pstVerificar.setString(3, marca);
+
+        ResultSet rs = pstVerificar.executeQuery();
+
+        if (rs.next()) {
+            // Producto encontrado, obtiene el valor de las unidades actuales
+            int unidadesActuales = rs.getInt("unidades");
+
+            // Suma las unidades que se están insertando en compras
+            int nuevasUnidades = unidadesActuales + cantidadCompra;
+
+            // Inserta los datos en la tabla compras
+            String SQL = "INSERT INTO compras (producto, marca, unidadmedida, proveedor, preciou, unidadescompra, total, usuario, fecha, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst = con.prepareStatement(SQL);
+            pst.setString(1, producto);
+            pst.setString(2, marca);
+            pst.setString(3, unidadMedida);
+            pst.setString(4, proveedor);
+            pst.setString(5, precio);
+            pst.setString(6, cantidad);
+            pst.setDouble(7, total);
+            pst.setString(8, usuario);
+            pst.setDate(9, Date.valueOf(fechaActual));
+            pst.setString(10, Activo);
+
+            pst.execute();
+
+            // Actualiza el campo unidades en la tabla producto
+            String sqlActualizar = "UPDATE producto SET unidades = ? WHERE nombre = ? AND unidadmedida = ? AND marca = ?";
+            PreparedStatement pstActualizar = con.prepareStatement(sqlActualizar);
+            pstActualizar.setInt(1, nuevasUnidades);
+            pstActualizar.setString(2, producto);
+            pstActualizar.setString(3, unidadMedida);
+            pstActualizar.setString(4, marca);
+
+            pstActualizar.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Registro guardado y unidades actualizadas con éxito");
+            mostrardatos();
+            limpiarDatos();
+        } else {
+            // Si no existe el producto
+            JOptionPane.showMessageDialog(null, "El producto no existe en la tabla productos");
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
     }
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
