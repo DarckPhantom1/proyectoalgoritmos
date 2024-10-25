@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class formProveedores extends javax.swing.JFrame {
     
     conexionSQL cc = new conexionSQL();
-    Connection con = cc.conexion();
+    Connection con= cc.conexion();
     String usuario=nombreUsuario.toUpperCase();
     
   public void mostrardatos(){

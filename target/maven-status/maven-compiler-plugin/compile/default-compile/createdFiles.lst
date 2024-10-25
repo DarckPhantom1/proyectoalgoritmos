@@ -11,6 +11,7 @@ formularios\formMenuPrincipal$10.class
 formularios\formProveedores$3.class
 formularios\formMenuPrincipal$6.class
 formularios\newUser$4.class
+formularios\Reporte_ProveedoresPDF$1.class
 formularios\formMenuPrincipal.class
 conexionSQL\clogin.class
 formularios\formClientes$2.class
@@ -32,6 +33,7 @@ formularios\cambioPassword$3.class
 Reportes\Excel.class
 formularios\formMenuPrincipal$4.class
 formularios\newUser$2.class
+formularios\Reporte_ProveedoresPDF.class
 formularios\fechaActual.class
 formularios\formMenuPrincipal$12.class
 formularios\newUser$5.class
@@ -39,6 +41,7 @@ formularios\cambioPassword$6.class
 formularios\formClientes$8.class
 formularios\login$2.class
 formularios\newUser.class
+formularios\Reporte_ProveedoresPDF$3.class
 formularios\formClientes$4.class
 formularios\formProveedores$5.class
 formularios\formProveedores$8.class
@@ -54,6 +57,7 @@ formularios\login$4.class
 formularios\formCompras$1.class
 formularios\formMenuPrincipal$3.class
 formularios\formMenuPrincipal$11.class
+formularios\Reporte_ProveedoresPDF$2.class
 formularios\formClientes.class
 formularios\formMenuPrincipal$7.class
 formularios\newUser$3.class
