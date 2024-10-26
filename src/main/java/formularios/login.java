@@ -134,7 +134,7 @@ public static String userRol;
             String query = "SELECT * FROM usuarios WHERE usuario = ? AND pass = ?";
             PreparedStatement pst = conexion.prepareStatement(query);
             pst.setString(1, usuario);
-            pst.setString(2, password);
+            pst.setString(2, passwordBase64);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {

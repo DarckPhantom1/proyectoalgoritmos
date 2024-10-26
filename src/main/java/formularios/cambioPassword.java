@@ -181,7 +181,7 @@ try{
            char[] passwordconfirmacion = txtConfirmacion.getPassword();
           String Passwordc= new String(passwordconfirmacion);
            
-    //    String passwordBase64 = Base64.getEncoder().encodeToString(Passwordn.getBytes());
+        String passwordBase64 = Base64.getEncoder().encodeToString(Passwordn.getBytes());
        
           
           if(Passwordn.equals(Passwordc)){
@@ -194,7 +194,7 @@ try{
            
            PreparedStatement pst = con.prepareStatement(SQL);
            
-           pst.setString(1,Passwordn);
+           pst.setString(1,passwordBase64);
            pst.setString(2,txtUsuario.getText());
            pst.execute();
            

@@ -56,7 +56,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -201,9 +200,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
 
         jMenu5.setText("Reportes");
 
-        jMenuItem9.setText("Facturacion");
-        jMenu5.add(jMenuItem9);
-
         jMenuItem10.setText("Existencia");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,14 +288,33 @@ public class formMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
+        if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        Reporte_Existencia objeto= new Reporte_Existencia();
+        objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
+if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+        Reporte_ClientesPDF objeto= new Reporte_ClientesPDF();
+        objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
+if("Administrador".equals(userRol)||"Gestor".equals(userRol) ){
+            Reporte_ProveedoresPDF objeto= new Reporte_ProveedoresPDF();
+        objeto.setVisible(true); 
+      }else{
+          JOptionPane.showMessageDialog(null, "El Usuario "+nombreUsuario+" no tiene acceso a este Formulario ");
+      }
+        
+        
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -427,7 +442,6 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables

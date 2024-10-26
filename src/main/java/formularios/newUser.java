@@ -115,13 +115,13 @@ conexionSQL cc = new conexionSQL();
             return; // Salir del método si el usuario ya existe
         }
     
-        //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
+          String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
            String SQL="insert into usuarios (usuario, pass, rol) values (?,?,?)";
           
            PreparedStatement pst = con.prepareStatement(SQL);
            
            pst.setString(1,txtUsuario.getText());
-           pst.setString(2,txtUsuario.getText());
+           pst.setString(2,passwordBase64);
            
            int seleccionado=cbRol.getSelectedIndex();
            pst.setString(3,cbRol.getItemAt(seleccionado));
