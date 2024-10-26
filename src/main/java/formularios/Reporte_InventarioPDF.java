@@ -20,12 +20,10 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
-    
+public class Reporte_InventarioPDF extends javax.swing.JFrame {
     conexionSQL cc = new conexionSQL();
     Connection con= cc.conexion();
-    
-    public Reporte_ProveedoresPDF() {
+    public Reporte_InventarioPDF() {
         initComponents();
         this.setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -53,7 +51,7 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Reporte de Proveedores");
+        setTitle("Reporte del Inventario");
 
         jButton1.setText("Generar Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +73,8 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -84,12 +82,12 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(70, 70, 70)
                 .addComponent(jButton1)
-                .addGap(56, 56, 56))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -98,30 +96,28 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           
+
         // Ruta donde se guardará el PDF
-        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores\\reporte_proveedores.pdf";      
-                String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores";      
+        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores\\reporte_proveedores.pdf";
+        String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores";
         String opc = jComboBox1.getSelectedItem().toString();
         String consultaSQL = null;
-                
+
         switch (opc) {
             case "Si" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='si'";
+            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='si'";
             case "No" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='no'";
+            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='no'";
             case "Todos" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores";
+            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores";
         }
-        
-        
 
         try {
             // Verificar si el archivo PDF ya existe, y si es así, generar un nombre único
@@ -174,7 +170,7 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
             documento.close();
 
             JOptionPane.showMessageDialog(null, "Reporte PDF generado correctamente.");
-            
+
             File carpeta = new File(rutaCarpeta);
             // Verificar si el escritorio (Desktop) es compatible
             if (Desktop.isDesktopSupported()) {
@@ -185,15 +181,15 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                         // Abrir la carpeta
                         desktop.open(carpeta);
                         System.out.println("Carpeta abierta: " + rutaCarpeta);
-                } else {
-                    System.out.println("La carpeta no existe.");
+                    } else {
+                        System.out.println("La carpeta no existe.");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                System.out.println("La función no es compatible en este sistema.");
             }
-        } else {
-            System.out.println("La función no es compatible en este sistema.");
-        }
 
         } catch (DocumentException | FileNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al generar el PDF: " + e.getMessage());
@@ -204,11 +200,37 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Reporte_InventarioPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Reporte_InventarioPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Reporte_InventarioPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Reporte_InventarioPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reporte_ProveedoresPDF().setVisible(true);
+                new Reporte_InventarioPDF().setVisible(true);
             }
         });
     }

@@ -20,12 +20,10 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
-    
+public class Reporte_ClientesPDF extends javax.swing.JFrame {
     conexionSQL cc = new conexionSQL();
     Connection con= cc.conexion();
-    
-    public Reporte_ProveedoresPDF() {
+    public Reporte_ClientesPDF() {
         initComponents();
         this.setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -43,7 +41,6 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
             }
         });
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,7 +50,7 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Reporte de Proveedores");
+        setTitle("Reporte de Clientes");
 
         jButton1.setText("Generar Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +72,8 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -84,12 +81,12 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(70, 70, 70)
                 .addComponent(jButton1)
-                .addGap(56, 56, 56))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -98,37 +95,35 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           
+
         // Ruta donde se guardará el PDF
-        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores\\reporte_proveedores.pdf";      
-                String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores";      
+        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Clientes\\reporte_clientes.pdf";
+        String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Clientes";
         String opc = jComboBox1.getSelectedItem().toString();
         String consultaSQL = null;
-                
+
         switch (opc) {
             case "Si" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='si'";
+            consultaSQL = "SELECT idCliente, nombre, nit, telefono, direccion, usuario_igresa, activo FROM clientes where activo='si'";
             case "No" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='no'";
+            consultaSQL = "SELECT idCliente, nombre, nit, telefono, direccion, usuario_igresa, activo FROM clientes where activo='no'";
             case "Todos" -> // Consulta SQL
-                consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores";
+            consultaSQL = "SELECT idCliente, nombre, nit, telefono, direccion, usuario_igresa, activo FROM clientes";
         }
-        
-        
 
         try {
             // Verificar si el archivo PDF ya existe, y si es así, generar un nombre único
             File archivoPDF = new File(rutaPDF);
             int contador = 1;
             while (archivoPDF.exists()) {
-                rutaPDF = rutaCarpeta + "\\reporte_proveedores_" + contador + ".pdf";
+                rutaPDF = rutaCarpeta + "\\reporte_clientes_" + contador + ".pdf";
                 archivoPDF = new File(rutaPDF);
                 contador++;
             }
@@ -138,32 +133,34 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
             documento.open();
 
             // Título del reporte
-            documento.add(new Paragraph("Reporte de Proveedores", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Font.BOLD)));
+            documento.add(new Paragraph("Reporte de Clientes", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Font.BOLD)));
             documento.add(new Paragraph(" ")); // Espacio
 
-            // Crear tabla en el PDF con 6 columnas (una para cada campo de la tabla proveedores)
-            PdfPTable tabla = new PdfPTable(6);
+            // Crear tabla en el PDF con 7 columnas (una para cada campo de la tabla clientes)
+            PdfPTable tabla = new PdfPTable(7);
             tabla.setWidthPercentage(100);
-            tabla.setWidths(new float[] { 1, 3, 2, 3, 2, 1 }); // Anchos de las columnas
+            tabla.setWidths(new float[] { 1, 3, 2, 2, 3, 2, 1 }); // Anchos de las columnas
 
             // Encabezados de la tabla
             tabla.addCell(new Paragraph("ID", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Nombre", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("NIT", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Teléfono", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Dirección", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Usuario", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
-            tabla.addCell(new Paragraph("Activo", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Activo", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD)));
 
             // Conectar a la base de datos
             Statement st=con.createStatement();
             ResultSet rs=st.executeQuery(consultaSQL) ;
             // Llenar la tabla con los datos de la consulta
             while (rs.next()) {
-                tabla.addCell(rs.getString("idProveedor"));
+                tabla.addCell(rs.getString("idCliente"));
                 tabla.addCell(rs.getString("nombre"));
+                tabla.addCell(rs.getString("nit"));
                 tabla.addCell(rs.getString("telefono"));
                 tabla.addCell(rs.getString("direccion"));
-                tabla.addCell(rs.getString("usuario_ingresa"));
+                tabla.addCell(rs.getString("usuario_igresa"));
                 tabla.addCell(rs.getString("activo"));
             }
 
@@ -174,7 +171,7 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
             documento.close();
 
             JOptionPane.showMessageDialog(null, "Reporte PDF generado correctamente.");
-            
+
             File carpeta = new File(rutaCarpeta);
             // Verificar si el escritorio (Desktop) es compatible
             if (Desktop.isDesktopSupported()) {
@@ -185,15 +182,15 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
                         // Abrir la carpeta
                         desktop.open(carpeta);
                         System.out.println("Carpeta abierta: " + rutaCarpeta);
-                } else {
-                    System.out.println("La carpeta no existe.");
+                    } else {
+                        System.out.println("La carpeta no existe.");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                System.out.println("La función no es compatible en este sistema.");
             }
-        } else {
-            System.out.println("La función no es compatible en este sistema.");
-        }
 
         } catch (DocumentException | FileNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al generar el PDF: " + e.getMessage());
@@ -204,11 +201,37 @@ public class Reporte_ProveedoresPDF extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Reporte_ClientesPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Reporte_ClientesPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Reporte_ClientesPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Reporte_ClientesPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reporte_ProveedoresPDF().setVisible(true);
+                new Reporte_ClientesPDF().setVisible(true);
             }
         });
     }

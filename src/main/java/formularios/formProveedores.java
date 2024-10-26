@@ -87,30 +87,23 @@ public class formProveedores extends javax.swing.JFrame {
         txtDireccion.setText("");
     }
         
-     public void insertarDatos(){
-       try{
-           
-           String nproveedor = txtNombre.getText();
-           String valorSinGuion = nproveedor.replace("-", "");
-           String Activo="Si";
-          
-           if (nproveedor == null || nproveedor.trim().isEmpty()) {
-            JOptionPane.showMessageDialog( null,"Proveedor no puede ser vacio");
-           }else{
-               
-        String SQLVerificar = "SELECT COUNT(*) AS cantidad FROM proveedores WHERE REPLACE(?, '-', '') = REPLACE(?, '-', '')AND activo = 'Si'  ";
-        PreparedStatement pstVerificar = con.prepareStatement(SQLVerificar);
-        pstVerificar.setString(1, nproveedor);
-        pstVerificar.setString(2, nproveedor);
-        ResultSet rs = pstVerificar.executeQuery();
-        rs.next();
-        
-        if (rs.getInt(1) > 0) {
-            JOptionPane.showMessageDialog(null, "El proveedor ya existe. Por favor, elija otro nombre de proveedor.");
-            return; // Salir del método si el proveedor ya existe
-        }
+     public void insertarDatos(){  
+        try{
+            String Activo="Si";
+            String nproveedor = txtNombre.getText().replace("-", ""); // Remueve guiones en Java
+            String SQLVerificar = "SELECT COUNT(*) AS cantidad FROM proveedores WHERE nombre = ? AND activo = 'Si'";
+            PreparedStatement pstVerificar = con.prepareStatement(SQLVerificar);
+            pstVerificar.setString(1, nproveedor);
+            ResultSet rs = pstVerificar.executeQuery();
+            rs.next();
+
+            if (rs.getInt(1) > 0) {
+                JOptionPane.showMessageDialog(null, "El proveedor ya existe. Por favor, elija otro nombre de proveedor.");
+                return; // Salir del método si el proveedor ya existe
+            }
+
     
-        //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
+            //   String passwordBase64 = Base64.getEncoder().encodeToString(nusuario.getBytes("UTF-8"));
           String SQL="insert into proveedores (nombre,telefono,direccion,usuario_ingresa,activo) values (?,?,?,?,?)";
           
            
@@ -127,7 +120,7 @@ public class formProveedores extends javax.swing.JFrame {
            JOptionPane.showMessageDialog( null,"Registro guardado con exito");
            mostrardatos();
            limpiarDatos();
-           }
+           
         }catch (HeadlessException | SQLException e){
           JOptionPane.showMessageDialog(null,"Error Registro "+e.getMessage());
             

@@ -2,6 +2,7 @@ formularios\formMenuPrincipal$9.class
 formularios\formClientes$6.class
 formularios\cambioPassword$1.class
 formularios\formMenuPrincipal$2.class
+formularios\Reporte_ProveedoresPDF$4.class
 formularios\formProveedores$6.class
 formularios\formCompras.class
 formularios\formClientes$3.class
@@ -11,6 +12,7 @@ formularios\formMenuPrincipal$10.class
 formularios\formProveedores$3.class
 formularios\formMenuPrincipal$6.class
 formularios\newUser$4.class
+formularios\Reporte_ClientesPDF$3.class
 formularios\Reporte_ProveedoresPDF$1.class
 formularios\formMenuPrincipal.class
 conexionSQL\clogin.class
@@ -19,6 +21,8 @@ formularios\formProveedores$2.class
 conexionSQL\conexionSQL.class
 formularios\formMenuPrincipal$8.class
 formularios\newUser$1.class
+formularios\Reporte_ClientesPDF$2.class
+formularios\Reporte_ClientesPDF.class
 formularios\formInventarios.class
 com\coneccion1\facturacioninventarios\FacturacionInventarios.class
 formularios\formClientes$5.class
@@ -39,8 +43,10 @@ formularios\formMenuPrincipal$12.class
 formularios\newUser$5.class
 formularios\cambioPassword$6.class
 formularios\formClientes$8.class
+formularios\Reporte_ClientesPDF$4.class
 formularios\login$2.class
 formularios\newUser.class
+formularios\Reporte_ClientesPDF$1.class
 formularios\Reporte_ProveedoresPDF$3.class
 formularios\formClientes$4.class
 formularios\formProveedores$5.class
