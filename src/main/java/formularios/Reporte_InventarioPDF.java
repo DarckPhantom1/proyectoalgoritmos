@@ -36,7 +36,7 @@ public class Reporte_InventarioPDF extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
 
                 if (respuesta == JOptionPane.YES_OPTION) {
-                    setVisible(false); // Oculta el formulario
+                    setVisible(false); 
                 }
             }
         });
@@ -105,18 +105,18 @@ public class Reporte_InventarioPDF extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         // Ruta donde se guardará el PDF
-        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores\\reporte_proveedores.pdf";
-        String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Proveedores";
+        String rutaPDF = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Productos\\reporte_productos.pdf";
+        String rutaCarpeta = "C:\\Users\\pinip\\Desktop\\Nueva carpeta\\proyectoalgoritmos\\Reportes\\Productos";
         String opc = jComboBox1.getSelectedItem().toString();
         String consultaSQL = null;
 
         switch (opc) {
             case "Si" -> // Consulta SQL
-            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='si'";
+            consultaSQL = "SELECT nombre, unidadmedida, precioventa, activo, idproducto, marca, unidades FROM producto where activo='si'";
             case "No" -> // Consulta SQL
-            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores where activo='no'";
+            consultaSQL = "SELECT nombre, unidadmedida, precioventa, activo, idproducto, marca, unidades FROM producto where activo='no'";
             case "Todos" -> // Consulta SQL
-            consultaSQL = "SELECT idProveedor, nombre, telefono, direccion, usuario_ingresa, activo FROM proveedores";
+            consultaSQL = "SELECT nombre, unidadmedida, precioventa, activo, idproducto, marca, unidades FROM producto";
         }
 
         try {
@@ -124,7 +124,7 @@ public class Reporte_InventarioPDF extends javax.swing.JFrame {
             File archivoPDF = new File(rutaPDF);
             int contador = 1;
             while (archivoPDF.exists()) {
-                rutaPDF = rutaCarpeta + "\\reporte_proveedores_" + contador + ".pdf";
+                rutaPDF = rutaCarpeta + "\\reporte_productos_" + contador + ".pdf";
                 archivoPDF = new File(rutaPDF);
                 contador++;
             }
@@ -134,20 +134,21 @@ public class Reporte_InventarioPDF extends javax.swing.JFrame {
             documento.open();
 
             // Título del reporte
-            documento.add(new Paragraph("Reporte de Proveedores", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Font.BOLD)));
+            documento.add(new Paragraph("Reporte de Productos", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Font.BOLD)));
             documento.add(new Paragraph(" ")); // Espacio
 
-            // Crear tabla en el PDF con 6 columnas (una para cada campo de la tabla proveedores)
-            PdfPTable tabla = new PdfPTable(6);
+            // Crear tabla en el PDF con 7 columnas (una para cada campo de la tabla proveedores)
+            PdfPTable tabla = new PdfPTable(7);
             tabla.setWidthPercentage(100);
-            tabla.setWidths(new float[] { 1, 3, 2, 3, 2, 1 }); // Anchos de las columnas
+            tabla.setWidths(new float[] { 1, 2, 2, 1, 2, 2, 1 }); // Anchos de las columnas
 
             // Encabezados de la tabla
             tabla.addCell(new Paragraph("ID", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Nombre", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
-            tabla.addCell(new Paragraph("Teléfono", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
-            tabla.addCell(new Paragraph("Dirección", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
-            tabla.addCell(new Paragraph("Usuario", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Marca", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Unidad Medida", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Precio Venta", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Unidades", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
             tabla.addCell(new Paragraph("Activo", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD)));
 
             // Conectar a la base de datos
@@ -155,11 +156,13 @@ public class Reporte_InventarioPDF extends javax.swing.JFrame {
             ResultSet rs=st.executeQuery(consultaSQL) ;
             // Llenar la tabla con los datos de la consulta
             while (rs.next()) {
-                tabla.addCell(rs.getString("idProveedor"));
+                
+                tabla.addCell(rs.getString("idproducto"));
                 tabla.addCell(rs.getString("nombre"));
-                tabla.addCell(rs.getString("telefono"));
-                tabla.addCell(rs.getString("direccion"));
-                tabla.addCell(rs.getString("usuario_ingresa"));
+                tabla.addCell(rs.getString("marca"));
+                tabla.addCell(rs.getString("unidadmedida"));
+                tabla.addCell(rs.getString("precioventa"));
+                tabla.addCell(rs.getString("unidades"));
                 tabla.addCell(rs.getString("activo"));
             }
 

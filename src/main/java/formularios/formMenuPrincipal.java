@@ -156,6 +156,11 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Reportes");
 
         jMenuItem9.setText("Facturacion");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem9);
 
         jMenuItem10.setText("Existencia");
@@ -245,6 +250,11 @@ public class formMenuPrincipal extends javax.swing.JFrame {
         formProveedores objeto = new formProveedores();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        Reporte_FacturacionPDF objeto = new Reporte_FacturacionPDF();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
